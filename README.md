@@ -1,12 +1,13 @@
-# Assignment1
+# How to test
+
+## Assignment1
 1. npm i or yarn install
 2. npm run test or yarn test
 
-# Assignment2
+## Assignment2
 - open index.html in browser(double click index.html in folder)
 
-# Assignment3
-## How to test
+## Assignment3
 1. npm i or yarn install
 2. npm run dev or yarn dev
 
