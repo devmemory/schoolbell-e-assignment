@@ -1,0 +1,16 @@
+.div_btns {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  min-width: 360px;
+}
+
+.div_btns > button {
+  padding: 4px 8px;
+  border: 1px solid black;
+  background-color: var(--btn-color);
+}
+
+.div_btns > button:first-child {
+  margin-right: 8px;
+}

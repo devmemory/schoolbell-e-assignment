@@ -1,0 +1,11 @@
+.div_result {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: var(--btn-color);
+  min-width: 360px;
+  font-weight: bold;
+}
+
+.div_result > div:not(:last-child) {
+  margin-bottom: 10px;
+}

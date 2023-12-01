@@ -1,0 +1,29 @@
+.div_box {
+  min-width: 360px;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid black;
+}
+
+/* first line */
+.div_box > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+/* close btn */
+.btn_close {
+  border: 1px solid black;
+  width: 16px;
+  height: 16px;
+  background-color: var(--btn-color);
+}
+
+.btn_close:hover {
+  opacity: 0.8;
+}
+
