@@ -24,30 +24,31 @@ const checkNumber = (arr: number[]) => {
 
     const sortedArr = arr.filter((v) => v !== e1).sort((a, b) => b - a);
 
-    sortedArr
-      .filter((v) => v !== e1)
-      .forEach((e2) => {
-        let numStr: string = "";
+    let numStr: string = "";
 
-        numStr = sortedArr.reduce((a, b) => `${a}` + `${b}`, numStr);
-        obj14[e1] = Number(numStr);
+    numStr = sortedArr.reduce((a, b) => `${a}` + `${b}`, numStr);
+    obj14[e1] = Number(numStr);
 
-        candidate = [...candidate, { k: [e1, obj14[e1]], v: e1 * obj14[e1] }];
+    // 1자리, 4자리 추가
+    candidate = [...candidate, { k: [e1, obj14[e1]], v: e1 * obj14[e1] }];
 
-        const key = e1 * 10 + e2;
-        if (!obj23.hasOwnProperty(key)) {
-          numStr = "";
-          numStr = sortedArr
-            .filter((v) => v !== e2)
-            .reduce((a, b) => `${a}` + `${b}`, numStr);
+    sortedArr.forEach((e2) => {
+      const key = e1 * 10 + e2;
+      if (!obj23.hasOwnProperty(key)) {
+        numStr = "";
+        numStr = sortedArr
+          .filter((v) => v !== e2)
+          .reduce((a, b) => `${a}` + `${b}`, numStr);
 
-          obj23[key] = Number(numStr);
-          candidate = [
-            ...candidate,
-            { k: [key, obj23[key]], v: key * obj23[key] },
-          ];
-        }
-      });
+        obj23[key] = Number(numStr);
+
+        // 2자리, 3자리
+        candidate = [
+          ...candidate,
+          { k: [key, obj23[key]], v: key * obj23[key] },
+        ];
+      }
+    });
   });
 
   const max = candidate.reduce((prev, current) =>
