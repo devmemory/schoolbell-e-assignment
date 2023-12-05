@@ -23,12 +23,12 @@ const UserResult = ({ result }: UserResultProps) => {
   return (
     <>
       {result && (
-        <div className={styles.div_result}>
+        <div className={styles.div_result} data-testid="result">
           {result.map((e) => {
             return (
-              <div key={e.name}>
-                UserName: {e.name} <br />
-                UserPassword: {hidePassword(e.password!)}
+              <div key={e.name!.value}>
+                UserName: {e.name!.value} <br />
+                UserPassword: {hidePassword(e.password!.value)}
               </div>
             );
           })}

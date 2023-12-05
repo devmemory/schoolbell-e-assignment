@@ -19,14 +19,6 @@ const UserBox = ({ list, deleteUser, onChangeText }: UserBoxProps) => {
     onChangeText(value, i, type);
   };
 
-  const error = (e: UserModel, type: USER_INPUT_TYPE) => {
-    if (e.error?.location === type) {
-      return e.error.msg;
-    }
-  };
-
-  console.log({list})
-
   return (
     <>
       {list.map((e, i) => {
@@ -43,8 +35,8 @@ const UserBox = ({ list, deleteUser, onChangeText }: UserBoxProps) => {
 
             <UserInput
               title="Name"
-              value={e.name!}
-              error={error(e!, USER_INPUT_ENUM.name)}
+              value={e.name!.value}
+              error={e.name?.error}
               onChange={(value) =>
                 validateAndChange(value, i, USER_INPUT_ENUM.name)
               }
@@ -52,8 +44,8 @@ const UserBox = ({ list, deleteUser, onChangeText }: UserBoxProps) => {
 
             <UserInput
               title="Password"
-              value={e.password!}
-              error={error(e!, USER_INPUT_ENUM.password)}
+              value={e.password!.value}
+              error={e.password?.error}
               onChange={(value) =>
                 validateAndChange(value, i, USER_INPUT_ENUM.password)
               }

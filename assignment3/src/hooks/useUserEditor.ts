@@ -3,12 +3,14 @@ import { UserModel } from "src/models/userModel";
 import { USER_INPUT_ENUM, USER_INPUT_TYPE } from "src/utils/constants";
 
 const useUserEditor = () => {
-  const [list, setList] = useState<UserModel[]>([{ name: "", password: "" }]);
+  const [list, setList] = useState<UserModel[]>([
+    { name: { value: "" }, password: { value: "" } },
+  ]);
   const [result, setResult] = useState<UserModel[]>();
 
   /** - add new user */
   const addUser = () => {
-    const newUser: UserModel = { name: "", password: "" };
+    const newUser: UserModel = { name: { value: "" }, password: { value: "" } };
 
     setList([...list, newUser]);
   };
@@ -25,17 +27,19 @@ const useUserEditor = () => {
   /** - show result */
   const confirm = () => {
     setResult(list);
-    setList([{ name: "", password: "" }]);
+    setList([{ name: { value: "" }, password: { value: "" } }]);
   };
 
   /** - check if there is error(> -1) */
   const error =
-    list.findIndex((e) => e.error !== undefined || e.password === "") > -1;
+    list.findIndex(
+      (e) => e.name?.error !== undefined || e.password?.error !== undefined || e.name!.value === "" || e.password!.value === ''
+    ) > -1;
 
   /** - input and validation */
   const onChangeText = (value: string, i: number, type: USER_INPUT_TYPE) => {
     setList((state) => {
-      state[i][type] = value!;
+      state[i][type]!.value = value!;
 
       if (type === USER_INPUT_ENUM.name) {
         state = _validateName(value, i, state);
@@ -54,33 +58,27 @@ const useUserEditor = () => {
     let hasError = false;
 
     if (value.length < 3) {
-      state[i].error = {
-        msg: "Name must be at least 3 characters.",
-        location: USER_INPUT_ENUM.name,
-      };
+      state[i].name!.error = "Name must be at least 3 characters.";
 
       hasError = true;
-    } else if (state[i].error !== undefined) {
-      state[i].error = undefined;
+    } else if (state[i].name?.error !== undefined) {
+      state[i].name!.error = undefined;
     }
 
     if (!hasError) {
       state.forEach((e, idx) => {
-        if (e.name === value && i !== idx) {
-          const err = {
-            msg: `The name ${value} is duplicated.`,
-            location: USER_INPUT_ENUM.name,
-          };
+        if (e.name!.value === value && i !== idx) {
+          const err = `The name ${value} is duplicated.`;
 
-          state[i].error = err;
-          state[idx].error = err;
+          state[i].name!.error = err;
+          state[idx].name!.error = err;
 
           hasError = true;
         }
 
         if (!hasError) {
-          state[i].error = undefined;
-          state[idx].error = undefined;
+          state[i].name!.error = undefined;
+          state[idx].name!.error = undefined;
         }
       });
     }
@@ -91,12 +89,9 @@ const useUserEditor = () => {
   /** - validate password */
   const _validatePw = (value: string, i: number, state: UserModel[]) => {
     if (value.length < 6) {
-      state[i].error = {
-        msg: "Password must be at least 6 characters.",
-        location: USER_INPUT_ENUM.password,
-      };
-    } else if (state[i].error !== undefined) {
-      state[i].error = undefined;
+      state[i].password!.error = "Password must be at least 6 characters.";
+    } else if (state[i].password!.error !== undefined) {
+      state[i].password!.error = undefined;
     }
 
     return [...state];

@@ -20,6 +20,7 @@ const UserInput = ({ title, value, onChange, error }: UserInputProps) => {
             ? `${styles.input_user} ${styles.has_error}`
             : styles.input_user
         }
+        data-testid={title}
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />

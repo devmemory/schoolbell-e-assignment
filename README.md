@@ -10,12 +10,14 @@
 ## Assignment3
 1. npm i or yarn install
 2. npm run dev or yarn dev
+3. to test npm run test or yarn test
 
 ### environment
 - Language: TypeScript, HTML, CSS(modules)
 - View Library: React
 - Bundler: Vite
 - State management: basic hooks
+- Testing library: Jest
 
 ## Folder structure
 ### src/hooks
