@@ -1,8 +1,8 @@
-import React, { ChangeEvent } from "react";
-import { UserModel } from "src/models/userModel";
+import React from "react";
+import UserModel from "src/models/userModel";
 import { USER_INPUT_ENUM, USER_INPUT_TYPE } from "src/utils/constants";
-import styles from "./user_box.module.css";
 import UserInput from "./UserInput";
+import styles from "./user_box.module.css";
 
 interface UserBoxProps {
   onChangeText: (value: string, i: number, type: USER_INPUT_TYPE) => void;
@@ -28,6 +28,7 @@ const UserBox = ({ list, deleteUser, onChangeText }: UserBoxProps) => {
               <p>User - {i}</p>
               <button
                 className={styles.btn_close}
+                data-testid='delete'
                 onClick={() => deleteUser(i)}>
                 x
               </button>

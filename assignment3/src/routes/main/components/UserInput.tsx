@@ -9,7 +9,10 @@ interface UserInputProps {
 }
 
 const UserInput = ({ title, value, onChange, error }: UserInputProps) => {
-  const hasError = error !== undefined;
+  const checkLength = value.length < 3 && value !== "" && title === "Name";
+  const hasError = error !== undefined || checkLength;
+
+  const errMsg = checkLength ? "Name must be at least 3 characters." : error;
 
   return (
     <>
@@ -24,7 +27,7 @@ const UserInput = ({ title, value, onChange, error }: UserInputProps) => {
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-      <div className={styles.div_error}>{error}</div>
+      <div className={styles.div_error}>{errMsg}</div>
     </>
   );
 };

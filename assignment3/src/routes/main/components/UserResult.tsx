@@ -1,5 +1,5 @@
 import React from "react";
-import { UserModel } from "src/models/userModel";
+import UserModel from "src/models/userModel";
 import styles from "./user_result.module.css";
 
 interface UserResultProps {

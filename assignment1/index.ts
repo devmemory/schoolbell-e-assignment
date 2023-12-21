@@ -18,10 +18,6 @@ const checkNumber = (arr: number[]) => {
   let candidate: CandidateType[] = [];
 
   arr.forEach((e1) => {
-    if (!obj14.hasOwnProperty(e1)) {
-      obj14[e1] = {};
-    }
-
     const sortedArr = arr.filter((v) => v !== e1).sort((a, b) => b - a);
 
     let numStr: string = "";
@@ -33,7 +29,7 @@ const checkNumber = (arr: number[]) => {
     candidate = [...candidate, { k: [e1, obj14[e1]], v: e1 * obj14[e1] }];
 
     sortedArr.forEach((e2) => {
-      const key = e1 * 10 + e2;
+      const key = Math.min(e2, e1) * 10 + Math.min(e1, e2);
       if (!obj23.hasOwnProperty(key)) {
         numStr = "";
         numStr = sortedArr

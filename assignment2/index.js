@@ -1,40 +1,43 @@
 // 여기에 정답을 작성해주세요
-// 1
-const target1 = document.getElementById("target-1");
+function $(selector) {
+  const element = document.querySelector(selector);
 
-target1.classList.remove("border");
+  function removeClass(name) {
+    element.classList.remove(name);
 
-// 2
-target1.style.setProperty("left", "250px");
-
-// 3
-const target2 = document.getElementsByClassName("target-2")[0];
-
-target2.classList.remove("border");
-
-target2.classList.add("blue");
-
-// 4
-target2.style.cssText = "left: 50px; margin-top: -15px;";
-
-// 5
-const target3 = document.getElementById("target-3");
-
-const target4 = document.getElementById("target-4");
-
-let opacity = 1;
-
-const time = setInterval(() => {
-  target3.style.setProperty("opacity", opacity);
-  opacity -= 0.1;
-
-  if (opacity <= 0) {
-    target3.style.setProperty("display", "none");
-    target4.classList.add("green");
-
-    clearInterval(time)
+    return this;
   }
-}, 100);
+
+  function css(arg1, arg2) {
+    if (arg2 === undefined) {
+      element.style.cssText = JSON.stringify(arg1).replaceAll(",", ";");
+    } else {
+      element.style.setProperty(arg1, arg2);
+    }
+  }
+
+  function addClass(name) {
+    element.classList.add(name);
+  }
+
+  function fadeOut(callback) {
+    let opacity = 1;
+
+    const time = setInterval(() => {
+      element.style.setProperty("opacity", opacity);
+      opacity -= 0.1;
+
+      if (opacity <= 0) {
+        element.style.setProperty("display", "none");
+        callback();
+
+        clearInterval(time);
+      }
+    }, 100);
+  }
+
+  return { removeClass, css, addClass, fadeOut };
+}
 
 // 아래 코드는 수정하지 않습니다
 
@@ -51,4 +54,4 @@ $(".target-2").removeClass("border").addClass("blue");
 $(".target-2").css({ left: 50, "margin-top": "-15px" });
 
 // 5
-$('#target-3').fadeOut(() => $('#target-4').addClass('green'));
+$("#target-3").fadeOut(() => $("#target-4").addClass("green"));

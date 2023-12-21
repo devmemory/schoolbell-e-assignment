@@ -3,4 +3,4 @@ export const USER_INPUT_ENUM = {
   password: "password",
 } as const;
 
-export type USER_INPUT_TYPE = keyof typeof USER_INPUT_ENUM
+export type USER_INPUT_TYPE = keyof typeof USER_INPUT_ENUM;
